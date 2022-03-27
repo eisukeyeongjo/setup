@@ -1,0 +1,9 @@
+---
+
+devs:
+  hosts:
+    dev01:
+      ansible_host: target_hostname 
+      ansible_user: target_username
+      ansible_ssh_private_key_file: "~/path/to/key.pem"
+
