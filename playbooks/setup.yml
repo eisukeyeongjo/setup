@@ -1,5 +1,0 @@
-- hosts: dev01
-  tasks:
-  - name: Install git
-    include_tasks: _install_git.yml
-

@@ -1,0 +1,10 @@
+- hosts: dev01_fedora
+  tasks:
+  - name: Install git
+    include_tasks: ./fedora/_git.yml
+
+  - name: Install neovim
+    include_tasks: ./fedora/_neovim.yml
+
+  - name: Install tmux
+    include_tasks: ./fedora/_tmux.yml
