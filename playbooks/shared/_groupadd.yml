@@ -1,0 +1,6 @@
+- name: Add group "{{ groupname }}" 
+  become: yes
+  group:
+    name: "{{ groupname }}" 
+    state: present
+

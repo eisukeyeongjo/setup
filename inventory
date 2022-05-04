@@ -2,6 +2,7 @@
 
 devs:
   vars:
+    groupname: GROUPNAME
     username: USERNAME
     password: PASSWORD
   hosts:

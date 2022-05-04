@@ -1,7 +1,10 @@
 - hosts: dev02_ubuntu
   tasks:
+  - include_tasks: ./shared/_groupadd.yml
+  - include_tasks: ./shared/_useradd.yml
   - include_tasks: ./ubuntu/_git.yml
   - include_tasks: ./ubuntu/_vim.yml
   - include_tasks: ./ubuntu/_tmux.yml
   - include_tasks: ./shared/_dotfiles.yml
+  - include_tasks: ./ubuntu/_docker.yml
 
