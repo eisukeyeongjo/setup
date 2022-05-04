@@ -1,7 +1,7 @@
-- name: Install neovim
+- name: Install vim
   become: yes
   apt:
-    name: neovim
+    name: vim
     update_cache: yes
     state: latest
 

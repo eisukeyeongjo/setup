@@ -1,10 +1,7 @@
 - hosts: dev02_ubuntu
   tasks:
-  - name: Install git
-    include_tasks: ./ubuntu/_git.yml
+  - include_tasks: ./ubuntu/_git.yml
+  - include_tasks: ./ubuntu/_vim.yml
+  - include_tasks: ./ubuntu/_tmux.yml
+  - include_tasks: ./shared/_dotfiles.yml
 
-  - name: Install neovim
-    include_tasks: ./ubuntu/_neovim.yml
-
-  - name: Install tmux
-    include_tasks: ./ubuntu/_tmux.yml
