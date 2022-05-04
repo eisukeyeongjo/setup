@@ -1,6 +1,9 @@
 ---
 
 devs:
+  vars:
+    username: USERNAME
+    password: PASSWORD
   hosts:
     dev01_fedora:
       ansible_host: TARGET_HOSTNAME
