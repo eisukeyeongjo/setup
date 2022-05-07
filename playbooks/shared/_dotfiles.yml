@@ -1,18 +1,70 @@
+- name: Create projects directory if it does not exist
+  become: yes
+  file:
+    path: '/home/{{ username }}/projects'
+    state: directory
+    owner: '{{ username }}'
+    group: '{{ groupname }}'
+
 - name: Clone dotfiles repo
+  become: yes
   git:
     repo: 'https://github.com/faultier92/dotfiles.git'
-    dest: ~/projects/dotfiles
+    dest: '/home/{{ username }}/projects/dotfiles'
     clone: yes
     update: yes
     force: yes
 
+- name: Recursively change ownership of a directory
+  become: yes
+  file:
+    path: '/home/{{ username }}/projects/dotfiles'
+    state: directory
+    recurse: yes
+    owner: '{{ username }}'
+    group: '{{ groupname }}'
+
 - name: Change file permissions
+  become: yes
   file:
     path: "/home/{{ username }}/projects/dotfiles/scripts/setup.sh" 
-    mode: '0700'
+    mode: +x
+    owner: '{{ username }}'
+    group: '{{ groupname }}'
 
-- name: Setup dotfiles
-  shell:
-    cmd: ./scripts/setup.sh
-    chdir: "/home/{{ username }}/projects/dotfiles"
+- name: Create hard links
+  become: yes
+  file:
+    src: '/home/{{ username }}/projects/dotfiles/{{ item.src }}'
+    dest: '/home/{{ username }}/{{ item.dest }}'
+    state: hard
+  loop:
+    - { src: '_gitconfig', dest: '.gitconfig' }
+    - { src: '_tmux.conf', dest: '.tmux.conf' }
+    - { src: '_vimrc',     dest: '.vimrc' }
 
+- name: Create .vim directory if it does not exist
+  become: yes
+  file:
+    path: "/home/{{ username }}/.vim/autoload"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ groupname }}"
+
+- name: Install vim-plug https://github.com/junegunn/vim-plug
+  become: yes
+  uri:
+    url: 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    dest: '/home/{{ username }}/.vim/autoload/plug.vim'
+
+- name: Change ownership of plug.vim
+  become: yes
+  file:
+    path: '/home/{{ username }}/.vim/autoload/plug.vim'
+    owner: '{{ username }}'
+    group: '{{ groupname }}'
+
+# - name: Install plugins
+#   become_user: '{{ username }}'
+#   shell:
+#     cmd: "vim  -c 'PlugInstall'  -c q -c q"

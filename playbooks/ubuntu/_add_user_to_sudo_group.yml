@@ -1,0 +1,6 @@
+- name: Add "{{ username }}" to sudo group
+  become: yes
+  user:
+    name: "{{ username }}"
+    groups: sudo
+    append: yes

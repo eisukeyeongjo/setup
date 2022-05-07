@@ -1,6 +1,6 @@
-- name: Install git
+- name: Install ansible
   become: yes
   apt:
-    name: git
+    name: ansible
     update_cache: yes
     state: latest
