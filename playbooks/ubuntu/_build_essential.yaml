@@ -1,6 +1,6 @@
-- name: Install tmux
+- name: Install build_essential
   become: yes
   apt:
-    name: tmux
+    name: build_essential
     update_cache: yes
     state: latest

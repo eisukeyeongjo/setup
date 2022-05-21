@@ -62,4 +62,3 @@
   file:
     path: /usr/local/bin/docker-compose
     mode: +x
-

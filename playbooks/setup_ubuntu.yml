@@ -6,6 +6,7 @@
   - include_tasks: ./ubuntu/_git.yml
   - include_tasks: ./ubuntu/_vim.yml
   - include_tasks: ./ubuntu/_tmux.yml
+  - include_tasks: ./ubuntu/_build_essential.yml
   - include_tasks: ./ubuntu/_ansible.yml
   - include_tasks: ./ubuntu/_terraform.yml
   - include_tasks: ./shared/_dotfiles.yml
