@@ -1,0 +1,17 @@
+---
+
+devs:
+  vars:
+    groupname: GROUPNAME
+    username: USERNAME
+    password: PASSWORD
+  hosts:
+    dev01_fedora:
+      ansible_host: TARGET_HOSTNAME
+      ansible_user: TARGET_USERNAME
+      ansible_ssh_private_key_file: "~/path/to/key.pem"
+
+    dev02_ubuntu:
+      ansible_host: TARGET_HOSTNAME
+      ansible_user: TARGET_USERNAME
+      ansible_ssh_private_key_file: "~/path/to/key.pem"
