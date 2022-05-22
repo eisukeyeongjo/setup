@@ -2,6 +2,11 @@
 
 ### 01. Edit inventory file
 
+```
+$ cp inventory{.sample,}
+$ vi inventory
+```
+
 ### 02. Execute playbook
 ##### 02-01. for fedora server
 
