@@ -1,6 +1,6 @@
-- name: Install git
+- name: Install vim
   become: yes
   dnf:
-    name: git
+    name: vim
     update_cache: yes
     state: latest

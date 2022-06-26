@@ -1,10 +1,13 @@
 - hosts: dev01_fedora
   tasks:
-  - name: Install git
-    include_tasks: ./fedora/_git.yml
-
-  - name: Install neovim
-    include_tasks: ./fedora/_neovim.yml
-
-  - name: Install tmux
-    include_tasks: ./fedora/_tmux.yml
+  - include_tasks: ./shared/_groupadd.yml
+  - include_tasks: ./shared/_useradd.yml
+  - include_tasks: ./fedora/_add_user_to_wheel_group.yml
+  - include_tasks: ./fedora/_git.yml
+  - include_tasks: ./fedora/_vim.yml
+  - include_tasks: ./fedora/_tmux.yml
+  - include_tasks: ./fedora/_development_tools.yml
+  - include_tasks: ./fedora/_ansible.yml
+  # WIP - include_tasks: ./fedora/_terraform.yml
+  - include_tasks: ./shared/_dotfiles.yml
+  # WIP - include_tasks: ./fedora/_docker.yml
