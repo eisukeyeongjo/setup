@@ -1,0 +1,13 @@
+- name: Uninstall existing mariadb
+  become: yes
+  dnf:
+    name: mariadb-server
+    state: absent
+
+- name: Install existing mariadb
+  become: yes
+  dnf:
+    name: mariadb-server
+    update_cache: yes
+    state: latest
+
