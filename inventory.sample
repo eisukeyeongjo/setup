@@ -5,6 +5,9 @@ devs:
     groupname: GROUPNAME
     username: USERNAME
     password: PASSWORD
+    mysql_root_password: MYSQL_ROOT_PASSWORD
+    mysql_username: MYSQL_USERNAME
+    mysql_password: MYSQL_PASSWORD
   hosts:
     dev01_fedora:
       ansible_host: TARGET_HOSTNAME
