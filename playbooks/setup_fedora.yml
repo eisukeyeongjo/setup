@@ -10,4 +10,4 @@
   - include_tasks: ./fedora/_ansible.yml
   # WIP - include_tasks: ./fedora/_terraform.yml
   - include_tasks: ./shared/_dotfiles.yml
-  # WIP - include_tasks: ./fedora/_docker.yml
+  - include_tasks: ./fedora/_docker.yml
