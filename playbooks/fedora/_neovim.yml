@@ -1,7 +1,0 @@
-- name: Install neovim 
-  become: yes
-  dnf:
-    name: neovim
-    update_cache: yes
-    state: latest
-

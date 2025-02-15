@@ -1,6 +1,0 @@
-- name: Install vim
-  become: yes
-  dnf:
-    name: vim
-    update_cache: yes
-    state: latest

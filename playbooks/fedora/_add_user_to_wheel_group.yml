@@ -1,6 +1,0 @@
-- name: Add "{{ username }}" to wheel group
-  become: yes
-  user:
-    name: "{{ username }}"
-    groups: wheel 
-    append: yes

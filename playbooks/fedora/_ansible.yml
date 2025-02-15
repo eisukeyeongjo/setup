@@ -1,6 +1,0 @@
-- name: Install ansible
-  become: yes
-  dnf:
-    name: ansible
-    update_cache: yes
-    state: latest

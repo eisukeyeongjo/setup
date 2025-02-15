@@ -1,6 +1,0 @@
-- name: Install git
-  become: yes
-  dnf:
-    name: git
-    update_cache: yes
-    state: latest

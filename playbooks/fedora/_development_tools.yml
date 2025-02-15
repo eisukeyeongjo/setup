@@ -1,6 +1,0 @@
-- name: Install 'development_tools' package group
-  become: yes
-  dnf:
-    name: '@Development tools'
-    update_cache: yes
-    state: latest

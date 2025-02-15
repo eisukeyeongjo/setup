@@ -1,3 +1,0 @@
-- hosts: dev03_debian
-  tasks:
-  - include_tasks: ./debian/_docker.yml
