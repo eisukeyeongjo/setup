@@ -1,7 +1,7 @@
 - name: Create projects directory if it does not exist
   become: yes
   file:
-    path: '/home/{{ username }}/projects'
+    path: '/home/{{ username }}/repositories'
     state: directory
     owner: '{{ username }}'
     group: '{{ groupname }}'
@@ -9,8 +9,8 @@
 - name: Clone dotfiles repo
   become: yes
   git:
-    repo: 'https://github.com/faultier92/dotfiles.git'
-    dest: '/home/{{ username }}/projects/dotfiles'
+    repo: 'https://github.com/eisukeyeongjo/dotfiles.git'
+    dest: '/home/{{ username }}/repositories/dotfiles'
     clone: yes
     update: yes
     force: yes
@@ -18,7 +18,7 @@
 - name: Recursively change ownership of a directory
   become: yes
   file:
-    path: '/home/{{ username }}/projects/dotfiles'
+    path: '/home/{{ username }}/repositories/dotfiles'
     state: directory
     recurse: yes
     owner: '{{ username }}'
@@ -27,7 +27,7 @@
 - name: Change file permissions
   become: yes
   file:
-    path: "/home/{{ username }}/projects/dotfiles/scripts/setup.sh" 
+    path: "/home/{{ username }}/repositories/dotfiles/scripts/setup.sh" 
     mode: +x
     owner: '{{ username }}'
     group: '{{ groupname }}'
@@ -35,7 +35,7 @@
 - name: Create hard links
   become: yes
   file:
-    src: '/home/{{ username }}/projects/dotfiles/{{ item.src }}'
+    src: '/home/{{ username }}/repositories/dotfiles/{{ item.src }}'
     dest: '/home/{{ username }}/{{ item.dest }}'
     state: hard
   loop:
@@ -43,26 +43,30 @@
     - { src: '_tmux.conf', dest: '.tmux.conf' }
     - { src: '_vimrc',     dest: '.vimrc' }
 
-- name: Create .vim directory if it does not exist
-  become: yes
-  file:
-    path: "/home/{{ username }}/.vim/autoload"
-    state: directory
-    owner: "{{ username }}"
-    group: "{{ groupname }}"
+### TODO: Use lazy.nvim
+### https://github.com/folke/lazy.nvim
+### https://lazy.folke.io/
 
-- name: Install vim-plug https://github.com/junegunn/vim-plug
-  become: yes
-  uri:
-    url: 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    dest: '/home/{{ username }}/.vim/autoload/plug.vim'
+# - name: Create .vim directory if it does not exist
+#   become: yes
+#   file:
+#     path: "/home/{{ username }}/.vim/autoload"
+#     state: directory
+#     owner: "{{ username }}"
+#     group: "{{ groupname }}"
 
-- name: Change ownership of plug.vim
-  become: yes
-  file:
-    path: '/home/{{ username }}/.vim/autoload/plug.vim'
-    owner: '{{ username }}'
-    group: '{{ groupname }}'
+# - name: Install vim-plug https://github.com/junegunn/vim-plug
+#   become: yes
+#   uri:
+#     url: 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#     dest: '/home/{{ username }}/.vim/autoload/plug.vim'
+
+# - name: Change ownership of plug.vim
+#   become: yes
+#   file:
+#     path: '/home/{{ username }}/.vim/autoload/plug.vim'
+#     owner: '{{ username }}'
+#     group: '{{ groupname }}'
 
 # - name: Install plugins
 #   become_user: '{{ username }}'

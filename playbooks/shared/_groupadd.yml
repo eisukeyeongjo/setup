@@ -3,4 +3,3 @@
   group:
     name: "{{ groupname }}" 
     state: present
-

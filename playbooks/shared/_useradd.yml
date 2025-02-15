@@ -6,4 +6,3 @@
     group: "{{ groupname }}" 
     shell: /bin/bash
     state: present
-
