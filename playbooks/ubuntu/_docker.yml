@@ -1,38 +1,74 @@
+# Install Docker Engine and Docker Compose
+# https://docs.docker.com/engine/install/ubuntu/
+# https://docs.docker.com/compose/install/linux/
+
 - name: Uninstall old versions
   become: yes
   apt:
-    name: ['docker', 'docker-engine', 'docker.io', 'containerd', 'runc']
+    pkg:
+      - 'containerd'
+      - 'docker'
+      - 'docker.io'
+      - 'docker-compose'
+      - 'docker-compose-v2'
+      - 'docker-doc'
+      - 'docker-engine'
+      - 'padman-docker'
+      - 'runc'
     state: absent
 
 - name: Set up the repository
   become: yes
   apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg', 'lsb-release', 'software-properties-common']
-    update_cache: yes
+    pkg:
+      - 'apt-transport-https'
+      - 'ca-certificates'
+      - 'curl'
+      - 'gnupg'
+      - 'lsb-release'
+      - 'software-properties-common'
+      update_cache: yes
+
+- name: Create /etc/apt/keyrings directory
+  become: yes
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
 
 - name: Add Dockers official GPG key
   become: yes
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
+    file: /etc/apt/keyrings/docker.asc
 
-- name: Verify that we have the key with the fingerprint
-  become: yes
-  apt_key:
-    id: 0EBFCD88
+- name: Ensure /etc/apt/keyrings/docker.asc has read permissions for all users
+  file:
+    path: /etc/apt/keyrings/docker.asc
+    mode: '0644'
+
+- name: Set ubuntu architecture
+  command: dpkg --print-architecture
+  register: architecture
 
 - name: Set ubuntu codename
-  command: lsb_release -cs
+  command: . /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}"
   register: codename
 
 - name: Set up the stable repository
   become: yes
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu "{{ codename.stdout }}" stable
+    repo: deb [arch="{{ architecture.stdout }}" signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu "{{ codename.stdout }}" stable
 
 - name: Install Docker Engine
   become: yes
   apt:
-    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+    pkg:
+      - 'docker-ce'
+      - 'docker-ce-cli'
+      - 'containerd.io'
+      - 'docker-buildx-plugin'
+      - 'docker-compose-plugin'
     update_cache: yes
 
 - name: Add "{{ username }}" to docker group
@@ -40,25 +76,3 @@
   user:
     name: "{{ username }}"
     groups: docker
-    append: yes
-
-- name: Set os
-  command: uname -s
-  register: os
-
-- name: Set architecture
-  command: uname -m
-  register: architecture
-
-- name: Install docker-compose
-  become: yes
-  get_url:
-    url: "https://github.com/docker/compose/releases/download/1.28.0/docker-compose-{{ os.stdout }}-{{ architecture.stdout }}"
-    dest: /usr/local/bin/docker-compose
-    force: yes
-
-- name: Apply executable permissions
-  become: yes
-  file:
-    path: /usr/local/bin/docker-compose
-    mode: +x
