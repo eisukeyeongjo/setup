@@ -1,3 +1,6 @@
+# Install terraform
+# https://developer.hashicorp.com/terraform/install
+
 - name: Add terraforms official GPG key
   become: yes
   apt_key:
