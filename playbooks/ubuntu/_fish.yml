@@ -1,0 +1,13 @@
+# Install fish shell
+# https://fishshell.com/
+
+- name: Add fish shell repository from PPA
+  apt_repository:
+    repo: ppa:fish-shell/release-3
+
+- name: Install fish
+  become: yes
+  apt:
+    name: fish
+    update_cache: yes
+    state: latest

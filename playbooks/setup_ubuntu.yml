@@ -8,6 +8,7 @@
   - include_tasks: ./ubuntu/_tmux.yml
   - include_tasks: ./ubuntu/_build_essential.yml
   - include_tasks: ./ubuntu/_ansible.yml
+  - include_tasks: ./ubuntu/_fish.yml
   # - include_tasks: ./ubuntu/_terraform.yml
-  - include_tasks: ./shared/_dotfiles.yml
-  - include_tasks: ./ubuntu/_docker.yml
+  # - include_tasks: ./shared/_dotfiles.yml
+  # - include_tasks: ./ubuntu/_docker.yml
