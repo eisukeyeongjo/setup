@@ -1,0 +1,6 @@
+- name: Install libyaml-dev
+  become: yes
+  apt:
+    name: libyaml-dev
+    update_cache: yes
+    state: latest

@@ -1,0 +1,6 @@
+- name: Install libffi-dev
+  become: yes
+  apt:
+    name: libffi-dev
+    update_cache: yes
+    state: latest

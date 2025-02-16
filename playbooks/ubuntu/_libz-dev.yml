@@ -1,0 +1,6 @@
+- name: Install libz-dev
+  become: yes
+  apt:
+    name: libz-dev
+    update_cache: yes
+    state: latest
