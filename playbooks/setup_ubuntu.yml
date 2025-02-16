@@ -1,10 +1,10 @@
-- hosts: dev02_ubuntu
+- hosts: dev_ubuntu
   tasks:
   - include_tasks: ./shared/_groupadd.yml
   - include_tasks: ./shared/_useradd.yml
   - include_tasks: ./ubuntu/_add_user_to_sudo_group.yml
   - include_tasks: ./ubuntu/_git.yml
-  - include_tasks: ./ubuntu/_vim.yml
+  - include_tasks: ./ubuntu/_neovim.yml
   - include_tasks: ./ubuntu/_tmux.yml
   - include_tasks: ./ubuntu/_build_essential.yml
   - include_tasks: ./ubuntu/_ansible.yml
